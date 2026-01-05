@@ -19,7 +19,7 @@ style: |
 ---
 
 # Présentation Projet technique
-### Application de gestion et filtrage des taches
+### Application de gestion et filtrage des tâches
 **Présentée par : Yousra Akajou**  
 **Encadré par : M. Fouad Essarraj**  
 **Date : 05/01/2026**
@@ -27,4 +27,4 @@ style: |
 ---
 
 # Choix du sujet
-**gestion des taches**
+**gestion des tâches**
