@@ -2,22 +2,38 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Task;
-use App\Models\Project;
-use App\Models\User;
+use Illuminate\Database\Seeder;
 
-class TaskSeeder extends Seeder {
-    public function run() {
-        $users = User::all();
-        $projects = Project::all();
-
-        \App\Models\Task::factory()->count(10)->make()->each(function($task) use ($users, $projects) {
-            $task->user_id = $users->random()->id;
-            $task->save();
-
-            // assigner aléatoirement 1 ou plusieurs projets
-            $task->projects()->attach($projects->random(rand(1,3))->pluck('id')->toArray());
-        });
+class TaskSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        $file = database_path('seeders/data/tasks.csv');
+        
+        if (($handle = fopen($file, 'r')) !== false) {
+            // Lire l'en-tête
+            $header = fgetcsv($handle, 1000, ',');
+            
+            // Lire les données
+            while (($row = fgetcsv($handle, 1000, ',')) !== false) {
+                $task = array_combine($header, $row);
+                
+                Task::create([
+                    'id' => $task['id'],
+                    'title' => $task['title'],
+                    'description' => $task['description'],
+                    'image' => $task['image'],
+                    'user_id' => $task['user_id'],
+                    'created_at' => $task['created_at'],
+                    'updated_at' => $task['updated_at']
+                ]);
+            }
+            
+            fclose($handle);
+        }
     }
 }
