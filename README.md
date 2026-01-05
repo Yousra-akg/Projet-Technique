@@ -35,22 +35,17 @@ style: |
 # Analyse technique 
 
 ##  Stack Technique
-- 1- **Framework** : Laravel  
-- 2- **Langage** : PHP  
-- 3- **Base de données** : MySQL  
+- 1- **Base de données** : MySQL  
+- 2- **Framework** : Laravel  
+- 3- **Architecture N-tier** : Services
 - 4- **Architecture** : MVC  
-- 5- **ORM** : Eloquent  
-- 6- **Moteur de vues** : Blade  
-- 7- **AJAX** : Actions dynamiques (filtrage, mise à jour du statut)  
-- 8- **Upload d’images** : Images associées aux tâches  
-- 9- **Framework UI Web** : Preline  
-
-- 10- **Services Laravel** : Logique métier séparée des contrôleurs  
-- 11- **Multilingue (i18n)** : Support de plusieurs langues  
-
-- 12- **Mobile** : Application Android  
-- 13- **Langage Mobile** : Kotlin  
-- 14- **Communication** : API REST Laravel (JSON)
+- 5- **Moteur de vues** : Blade  
+- 6- **AJAX** : Actions dynamiques (filtrage, mise à jour du statut)  
+- 7- **Upload d’images** : Images associées aux tâches  
+- 8- **Laravel multilingue** : Support de plusieurs langues  
+- 9- **Vite**
+- 10- **Preline UI library**
+- 11- **Lucide Library**
 
 ---
 
@@ -67,7 +62,6 @@ style: |
 - title  
 - description  
 - image
-- status (en attente / en cours / terminé)  
 - project_id (clé étrangère)  
 - timestamps  
 
@@ -80,17 +74,11 @@ style: |
 ---
 
 ## Fonctionnalités Clés
-- CRUD **Projets**
 - CRUD **Tâches**
-- Assigner une tâche à un projet
 - Filtrer les tâches par **projet**
-- Changer le statut d’une tâche
 
 ---
 
-## 🔐 Validation & Sécurité
-- Validation des champs obligatoires
-- Protection CSRF
-- Messages de succès / erreur
+
 
 
