@@ -72,7 +72,7 @@ style: |
 - Une **tâche** appartient à un **projet**
 
 # Fonctionnalitées 
-![alt text](images/use_case.png)
+![alt text](images/image.png)
 
 
 
