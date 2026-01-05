@@ -28,3 +28,6 @@ style: |
 
 # Choix du sujet
 **gestion des tâches**
+
+# Contexte
+![Scrum](images/2_tup.png)
