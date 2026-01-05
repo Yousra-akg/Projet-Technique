@@ -31,3 +31,56 @@ style: |
 
 # Contexte
 ![Scrum](images/2_tup.png)
+
+# Analyse technique 
+
+##  Stack Technique
+- **Framework** : Laravel  
+- **Langage** : PHP  
+- **Base de données** : MySQL  
+- **Architecture** : MVC  
+- **ORM** : Eloquent  
+- **Moteur de vues** : Blade  
+
+---
+
+##  Base de Données
+
+### Table `projects`
+- id  
+- title  
+- description  
+- timestamps  
+
+### Table `tasks`
+- id  
+- title  
+- description  
+- image
+- status (en attente / en cours / terminé)  
+- project_id (clé étrangère)  
+- timestamps  
+
+---
+
+## 🔗 Relation
+- Un **projet** possède plusieurs **tâches**  
+- Une **tâche** appartient à un **projet**
+
+---
+
+## Fonctionnalités Clés
+- CRUD **Projets**
+- CRUD **Tâches**
+- Assigner une tâche à un projet
+- Filtrer les tâches par **projet**
+- Changer le statut d’une tâche
+
+---
+
+## 🔐 Validation & Sécurité
+- Validation des champs obligatoires
+- Protection CSRF
+- Messages de succès / erreur
+
+
