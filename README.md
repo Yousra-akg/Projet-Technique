@@ -41,6 +41,16 @@ style: |
 - **Architecture** : MVC  
 - **ORM** : Eloquent  
 - **Moteur de vues** : Blade  
+- **AJAX** : Actions dynamiques (filtrage, mise à jour du statut)  
+- **Upload d’images** : Images associées aux tâches  
+- **Framework UI Web** : Preline  
+
+- **Services Laravel** : Logique métier séparée des contrôleurs  
+- **Multilingue (i18n)** : Support de plusieurs langues  
+
+- **Mobile** : Application Android  
+- **Langage Mobile** : Kotlin  
+- **Communication** : API REST Laravel (JSON)
 
 ---
 
