@@ -1,0 +1,27 @@
+classDiagram
+    class User {
+        +int id
+        +string name
+        +string email
+    }
+
+    class Project {
+        +int id
+        +string title
+        +text description
+        +timestamp created_at
+        +timestamp updated_at
+    }
+
+    class Task {
+        +int id
+        +string title
+        +text description
+        +string image
+        +timestamp created_at
+        +timestamp updated_at
+    }
+
+    
+    User "1" -- "*" Task : crée
+    Project "*" -- "*" Task : contient
