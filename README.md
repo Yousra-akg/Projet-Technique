@@ -35,22 +35,22 @@ style: |
 # Analyse technique 
 
 ##  Stack Technique
-- **Framework** : Laravel  
-- **Langage** : PHP  
-- **Base de données** : MySQL  
-- **Architecture** : MVC  
-- **ORM** : Eloquent  
-- **Moteur de vues** : Blade  
-- **AJAX** : Actions dynamiques (filtrage, mise à jour du statut)  
-- **Upload d’images** : Images associées aux tâches  
-- **Framework UI Web** : Preline  
+- 1- **Framework** : Laravel  
+- 2- **Langage** : PHP  
+- 3- **Base de données** : MySQL  
+- 4- **Architecture** : MVC  
+- 5- **ORM** : Eloquent  
+- 6- **Moteur de vues** : Blade  
+- 7- **AJAX** : Actions dynamiques (filtrage, mise à jour du statut)  
+- 8- **Upload d’images** : Images associées aux tâches  
+- 9- **Framework UI Web** : Preline  
 
-- **Services Laravel** : Logique métier séparée des contrôleurs  
-- **Multilingue (i18n)** : Support de plusieurs langues  
+- 10- **Services Laravel** : Logique métier séparée des contrôleurs  
+- 11- **Multilingue (i18n)** : Support de plusieurs langues  
 
-- **Mobile** : Application Android  
-- **Langage Mobile** : Kotlin  
-- **Communication** : API REST Laravel (JSON)
+- 12- **Mobile** : Application Android  
+- 13- **Langage Mobile** : Kotlin  
+- 14- **Communication** : API REST Laravel (JSON)
 
 ---
 
