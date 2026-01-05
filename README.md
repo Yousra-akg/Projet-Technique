@@ -37,6 +37,7 @@ style: |
 - CRUD **Tâches**
 - Details Tache
 - Filtrer les tâches par **projet**
+- Rechercher les taches
 
 ##  Stack Technique
 - 1- **Base de données** : MySQL  
