@@ -33,6 +33,10 @@ style: |
 ![Scrum](images/2_tup.png)
 
 # Analyse technique 
+## Fonctionnalités Clés
+- CRUD **Tâches**
+- Details Tache
+- Filtrer les tâches par **projet**
 
 ##  Stack Technique
 - 1- **Base de données** : MySQL  
@@ -46,8 +50,6 @@ style: |
 - 9- **Vite**
 - 10- **Preline UI library**
 - 11- **Lucide Library**
-
----
 
 ##  Base de Données
 
@@ -65,19 +67,13 @@ style: |
 - project_id (clé étrangère)  
 - timestamps  
 
----
-
 ## 🔗 Relation
 - Un **projet** possède plusieurs **tâches**  
 - Une **tâche** appartient à un **projet**
 
----
+# Fonctionnalitées 
+![alt text](images/use_case.png)
 
-## Fonctionnalités Clés
-- CRUD **Tâches**
-- Filtrer les tâches par **projet**
-
----
 
 
 
