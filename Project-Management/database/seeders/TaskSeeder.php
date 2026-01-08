@@ -4,36 +4,39 @@ namespace Database\Seeders;
 
 use App\Models\Task;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class TaskSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
+        DB::table('tasks')->truncate();
+
         $file = database_path('seeders/data/tasks.csv');
-        
-        if (($handle = fopen($file, 'r')) !== false) {
-            // Lire l'en-tête
-            $header = fgetcsv($handle, 1000, ',');
-            
-            // Lire les données
-            while (($row = fgetcsv($handle, 1000, ',')) !== false) {
-                $task = array_combine($header, $row);
-                
-                Task::create([
-                    'id' => $task['id'],
-                    'title' => $task['title'],
-                    'description' => $task['description'],
-                    'image' => $task['image'],
-                    'user_id' => $task['user_id'],
-                    'created_at' => $task['created_at'],
-                    'updated_at' => $task['updated_at']
-                ]);
+        $handle = fopen($file, 'r');
+
+        $header = fgetcsv($handle, 1000, ',');
+        $header[0] = preg_replace('/^\xEF\xBB\xBF/', '', $header[0]);
+
+        while (($row = fgetcsv($handle, 1000, ',')) !== false) {
+
+            if (count($row) !== count($header)) {
+                continue;
             }
-            
-            fclose($handle);
+
+            $task = array_combine($header, $row);
+
+            Task::create([
+                'title'       => $task['title'],
+                'description' => $task['description'] ?? null,
+                'image'       => $task['image'] ?? null,
+                'user_id'     => $task['user_id'],
+                'projet'      => $task['projet'],
+                'created_at'  => $task['created_at'],
+                'updated_at'  => $task['updated_at'],
+            ]);
         }
+
+        fclose($handle);
     }
 }

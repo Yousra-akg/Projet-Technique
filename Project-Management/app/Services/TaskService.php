@@ -34,7 +34,7 @@ class TaskService
             'title'       => $data['title'],
             'description' => $data['description'] ?? null,
             'image'       => $data['image'] ?? null,
-            'user_id'     => auth()->id(),
+            'user_id'     => 1,
         ]);
 
         if (isset($data['project_id'])) {
