@@ -14,16 +14,26 @@ class TaskController extends Controller
         private ProjectService $projectService
     ) {}
 
-    // 📄 Liste + Recherche + Filtre
     public function index(Request $request)
     {
         $tasks = $this->taskService->getTasks($request);
-        $projects = $this->projectService->getAll();
+        $projects = $this->projectService->getAll();  
+        
+        if ($request->ajax()) {
+            return view('tasks.partials.tasks-tbody', compact('tasks'))->render();
+        }
 
         return view('tasks.index', compact('tasks', 'projects'));
     }
 
-    // ➕ Ajouter tâche
+    public function show(Task $task, Request $request)
+    {
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json($task->load('projects'));
+        }
+        return redirect()->route('tasks.index');
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -32,23 +42,49 @@ class TaskController extends Controller
             'project_id' => 'required'
         ]);
 
-        $this->taskService->store($request->all());
+        $task = $this->taskService->store($request->all());
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'task' => $task->load('projects')
+            ]);
+        }
 
         return redirect()->route('tasks.index')->with('success', 'Tâche ajoutée');
     }
 
-    // ✏️ Modifier tâche
     public function update(Request $request, Task $task)
     {
+        // For PUT/PATCH requests with FormData including files, Laravel handles method spoofing but data comes in as normal request
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'image' => 'nullable|image',
+            'project_id' => 'required'
+        ]);
+
         $this->taskService->update($task, $request->all());
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Tâche modifiée'
+            ]);
+        }
 
         return redirect()->back()->with('success', 'Tâche modifiée');
     }
 
-    // 🗑️ Supprimer tâche
-    public function destroy(Task $task)
+    public function destroy(Task $task, Request $request)
     {
         $this->taskService->delete($task);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Tâche supprimée'
+            ]);
+        }
 
         return redirect()->back()->with('success', 'Tâche supprimée');
     }

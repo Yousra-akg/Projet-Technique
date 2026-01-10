@@ -1,28 +1,25 @@
 <?php
-
 namespace App\Services;
-
 use App\Models\Task;
-use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;  
 class TaskService
 {
-    public function getTasks($request)
-    {
-        $query = Task::query();
-
-        if ($request->filled('search')) {
-            $query->where('title', 'like', '%' . $request->search . '%');
-        }
-
-        if ($request->filled('project_id')) {
-            $query->whereHas('projects', function ($q) use ($request) {
-                $q->where('projects.id', $request->project_id);
+    public function getTasks(Request $request)
+{
+    return Task::query()
+        ->when($request->search, function($query, $search) {
+            $query->where('title', 'like', "{$search}%");
+        })
+        ->when($request->project_id, function($query, $projectId) {
+            $query->whereHas('projects', function($q) use ($projectId) {
+                $q->where('projects.id', $projectId);
             });
-        }
-
-        return $query->with(['user', 'projects'])->paginate(5);
-    }
+        })
+        ->with('projects')
+        ->latest()
+        ->paginate(10);  
+}
 
     public function store(array $data)
     {
