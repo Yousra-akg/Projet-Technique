@@ -1,4 +1,4 @@
 ﻿title,description,image,user_id,projet,created_at,updated_at
-Concevoir la base de données,"Créer le schéma de la base de données avec les relations",db_design.jpg,1,"Application Web Gestion de Projet",2025-01-08 09:00:00,2025-01-08 09:00:00
-Créer l'interface utilisateur,"Développer les vues principales de l'application",ui_design.jpg,2,"Site E-commerce",2025-01-09 10:00:00,2025-01-09 10:00:00
-Implémenter l'authentification,"Mettre en place le système de connexion/inscription",auth.jpg,3,"Application Mobile",2025-01-10 11:00:00,2025-01-10 11:00:00
+Concevoir la base de données,"Créer le schéma de la base de données avec les relations",db_design.jpg,1,"Application Web Gestion de Projet | Site E-commerce",2025-01-08 09:00:00,2025-01-08 09:00:00
+Créer l'interface utilisateur,"Développer les vues principales de l'application",ui_design.jpg,2,"Site E-commerce | Application Mobile",2025-01-09 10:00:00,2025-01-09 10:00:00
+Implémenter l'authentification,"Mettre en place le système de connexion/inscription",auth.jpg,3,"Application Mobile | Application Web Gestion de Projet | Site E-commerce",2025-01-10 11:00:00,2025-01-10 11:00:00

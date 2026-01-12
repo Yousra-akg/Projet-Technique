@@ -1,12 +1,5 @@
 <?php
-
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 
-use App\Http\Controllers\PublicTaskController;
-
-Route::get('/', [PublicTaskController::class, 'index'])->name('home');
-Route::get('/details/{task}', [PublicTaskController::class, 'show'])->name('public.tasks.show');
-
-Route::resource('tasks', TaskController::class);
-Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
+Route::get('/', [TaskController::class, 'index'])->name('tasks.index');
+Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
