@@ -21,12 +21,11 @@ class ProjectServiceTest extends TestCase
 
     public function test_it_can_fetch_all_projects()
     {
-    
-        Project::create(['title' => 'Project A', 'description' => 'Description A']);
-        Project::create(['title' => 'Project B', 'description' => 'Description B']);
+        $this->seed(\Database\Seeders\ProjectSeeder::class);
+
         $projects = $this->projectService->getAll();
 
-        $this->assertCount(2, $projects);
-        $this->assertEquals('Project A', $projects->first()->title);
+        $this->assertCount(3, $projects);
+        $this->assertEquals('Application Web Gestion de Projet', $projects->first()->title);
     }
 }
