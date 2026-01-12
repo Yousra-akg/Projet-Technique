@@ -26,9 +26,12 @@ class TaskServiceTest extends TestCase
 
     public function test_it_can_store_a_task()
     {
+        $this->seed(\Database\Seeders\DatabaseSeeder::class);
+        
         Storage::fake('public');
         $file = UploadedFile::fake()->image('task.jpg');
-        $project = Project::create(['title' => 'Test Project']);
+        
+        $project = Project::find(1);
 
         $data = [
             'title' => 'New Task',
@@ -46,11 +49,10 @@ class TaskServiceTest extends TestCase
 
     public function test_it_can_update_a_task()
     {
-        $task = Task::create([
-            'title' => 'Old Title', 
-            'user_id' => 1
-        ]);
-        $newProject = Project::create(['title' => 'New Project']);
+        $this->seed(\Database\Seeders\DatabaseSeeder::class);
+
+        $task = Task::find(1);
+        $newProject = Project::find(2);
 
         $data = [
             'title' => 'Updated Title',
@@ -59,29 +61,30 @@ class TaskServiceTest extends TestCase
 
         $this->taskService->update($task, $data);
 
-        $this->assertDatabaseHas('tasks', ['title' => 'Updated Title']);
+        $this->assertDatabaseHas('tasks', ['id' => 1, 'title' => 'Updated Title']);
         $this->assertTrue($task->fresh()->projects->contains($newProject));
     }
 
     public function test_it_can_delete_a_task()
     {
-        $task = Task::create(['title' => 'To Delete', 'user_id' => 1]);
+        $this->seed(\Database\Seeders\DatabaseSeeder::class);
+
+        $task = Task::find(1);
 
         $this->taskService->delete($task);
 
-        $this->assertDatabaseMissing('tasks', ['id' => $task->id]);
+        $this->assertDatabaseMissing('tasks', ['id' => 1]);
     }
 
     public function test_it_can_filter_tasks_by_title()
     {
-        Task::create(['title' => 'Apple Task', 'user_id' => 1]);
-        Task::create(['title' => 'Banana Task', 'user_id' => 1]);
+        $this->seed(\Database\Seeders\DatabaseSeeder::class);
 
-        $request = new Request(['search' => 'Apple']);
+        $request = new Request(['search' => 'Concevoir']);
 
         $results = $this->taskService->getTasks($request);
 
         $this->assertCount(1, $results);
-        $this->assertEquals('Apple Task', $results->first()->title);
+        $this->assertEquals('Concevoir la base de données', $results->first()->title);
     }
 }
