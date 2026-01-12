@@ -74,14 +74,16 @@ class TaskServiceTest extends TestCase
 
     public function test_it_can_filter_tasks_by_title()
     {
-        Task::create(['title' => 'Apple Task', 'user_id' => 1]);
-        Task::create(['title' => 'Banana Task', 'user_id' => 1]);
+        // Act: Seed the database (Users, Projects, Tasks)
+        $this->seed(\Database\Seeders\DatabaseSeeder::class);
 
-        $request = new Request(['search' => 'Apple']);
+        // Search for "Concevoir" (from tasks.csv: "Concevoir la base de données")
+        $request = new Request(['search' => 'Concevoir']);
 
         $results = $this->taskService->getTasks($request);
 
+        // Assert
         $this->assertCount(1, $results);
-        $this->assertEquals('Apple Task', $results->first()->title);
+        $this->assertEquals('Concevoir la base de données', $results->first()->title);
     }
 }

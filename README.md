@@ -25,6 +25,8 @@ style: |
 **Date : 05/01/2026**
 
 ---
+# La méthode Waterfall (En cascade)
+![Scrum](images/waterfall.png)
 
 # Choix du sujet
 **gestion des tâches**

@@ -3,7 +3,7 @@ left to right direction
 actor "Visiteur" as Visiteur
 actor "Admin" as Admin
 
-package "Application Todo List" {
+package "Application gestion de projet" {
     usecase "Consulter la page d'accueil" as UC_Accueil
     usecase "Voir les détails d'une tâche" as UC_Details
     
