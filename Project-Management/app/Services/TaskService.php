@@ -21,7 +21,7 @@ class TaskService
         ->paginate(10);  
 }
 
-    public function store(array $data)
+    public function create(array $data)
     {
         if (isset($data['image'])) {
             $data['image'] = $data['image']->store('tasks', 'public');
