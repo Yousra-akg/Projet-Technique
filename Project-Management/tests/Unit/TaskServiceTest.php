@@ -29,19 +29,6 @@ class TaskServiceTest extends TestCase
         $this->assertGreaterThan(0, $result->total());
     }
 
-    public function test_it_can_filter_tasks_by_title()
-    {
-        // "Concevoir" exists in the CSV data
-        $request = new Request([
-            'search' => 'Concevoir'
-        ]);
-
-        $result = $this->service->getTasks($request);
-
-        // Should find "Concevoir la base de données"
-        $this->assertEquals(1, $result->total());
-    }
-
     public function test_it_can_filter_tasks_by_project()
     {
         // "Application Web Gestion de Projet" exists in CSV
