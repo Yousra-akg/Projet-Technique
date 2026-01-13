@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Task;
+use App\Models\Project;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -10,33 +11,36 @@ class TaskSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('tasks')->truncate();
-
         $file = database_path('seeders/data/tasks.csv');
-        $handle = fopen($file, 'r');
+        $lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        
+        $rows = array_map('str_getcsv', $lines);
+        
+        $header = array_shift($rows);
+        
+        $header[0] = preg_replace('/^[\xEF\xBB\xBF]+/', '', $header[0]);
 
-        $header = fgetcsv($handle, 1000, ',');
-        $header[0] = preg_replace('/^\xEF\xBB\xBF/', '', $header[0]);
-
-        while (($row = fgetcsv($handle, 1000, ',')) !== false) {
-
+        foreach ($rows as $row) {
             if (count($row) !== count($header)) {
                 continue;
             }
 
-            $task = array_combine($header, $row);
+            $data = array_combine($header, $row);
 
-            Task::create([
-                'title'       => $task['title'],
-                'description' => $task['description'] ?? null,
-                'image'       => $task['image'] ?? null,
-                'user_id'     => $task['user_id'],
-                'projet'      => $task['projet'],
-                'created_at'  => $task['created_at'],
-                'updated_at'  => $task['updated_at'],
+            $task = Task::create([
+                'title'       => $data['title'],
+                'description' => $data['description'] ?? null,
+                'image'       => $data['image'] ?? null,
+                'user_id'     => $data['user_id'],
+                'created_at'  => $data['created_at'],
+                'updated_at'  => $data['updated_at'],
             ]);
-        }
 
-        fclose($handle);
+            if (!empty($data['projet'])) {
+                $projectTitles = explode(' | ', $data['projet']);
+                $projectIds = Project::whereIn('title', $projectTitles)->pluck('id');
+                $task->projects()->attach($projectIds);
+            }
+        }
     }
 }
