@@ -14,7 +14,7 @@ class TaskController extends Controller
     {}
     
     public function index(Request $request){
-        $tasks = $this->taskService->getTasks($request);
+        $tasks = $this->taskService->getTasks($request->all());
         $projects =$this->projectService->getAll();
 
         if($request->ajax()){

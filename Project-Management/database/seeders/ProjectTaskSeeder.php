@@ -12,6 +12,10 @@ class ProjectTaskSeeder extends Seeder
      */
     public function run(): void
     {
+        \Illuminate\Support\Facades\Schema::disableForeignKeyConstraints();
+        DB::table('project_task')->truncate();
+        \Illuminate\Support\Facades\Schema::enableForeignKeyConstraints();
+
         $file = database_path('seeders/data/project_task.csv');
         
         if (($handle = fopen($file, 'r')) !== false) {

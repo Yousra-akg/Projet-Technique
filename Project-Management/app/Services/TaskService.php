@@ -5,21 +5,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;  
 class TaskService
 {
-    public function getTasks(Request $request)
-{
-    return Task::query()
-        ->when($request->search, function($query, $search) {
-            $query->where('title', 'like', "{$search}%");
-        })
-        ->when($request->project_id, function($query, $projectId) {
-            $query->whereHas('projects', function($q) use ($projectId) {
-                $q->where('projects.id', $projectId);
-            });
-        })
-        ->with('projects')
-        ->latest()
-        ->paginate(10);  
-}
+    public function getTasks(array $filters)
+    {
+        return Task::query()
+            ->when($filters['search'] ?? null, function($query, $search) {
+                $query->where('title', 'like', "%{$search}%");
+            })
+            ->when($filters['project_id'] ?? null, function($query, $projectId) {
+                $query->whereRelation('projects', 'id', $projectId);
+            })
+            ->with('projects')
+            ->latest()
+            ->paginate(10);  
+    }
 
     public function store(array $data)
     {

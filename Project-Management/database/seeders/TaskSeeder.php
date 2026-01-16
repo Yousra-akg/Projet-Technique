@@ -10,7 +10,9 @@ class TaskSeeder extends Seeder
 {
     public function run(): void
     {
+        \Illuminate\Support\Facades\Schema::disableForeignKeyConstraints();
         DB::table('tasks')->truncate();
+        \Illuminate\Support\Facades\Schema::enableForeignKeyConstraints();
 
         $file = database_path('seeders/data/tasks.csv');
         $handle = fopen($file, 'r');
