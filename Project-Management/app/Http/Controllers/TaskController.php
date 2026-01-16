@@ -28,7 +28,7 @@ class TaskController extends Controller
         $this->taskService->store($request->all());
         return response()->json([
             "success"=>true,
-            "message"=>"Task added successfully"
+            "message"=>__('tasksview.success_message')
         ]);
     }
 }

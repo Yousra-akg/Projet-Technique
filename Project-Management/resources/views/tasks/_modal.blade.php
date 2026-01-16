@@ -3,7 +3,7 @@
         <div class="flex flex-col bg-white border shadow-sm rounded-xl">
             <div class="flex justify-between items-center py-3 px-4 border-b">
                 <h3 class="font-bold text-black border-2 border-transparent">
-                    {{ __('messages.modal.title') }}
+                    {{ __('tasksview.modal_title') }}
                 </h3>
                 <button type="button" class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" onclick="closeModal()">
                     <span class="sr-only">Close</span>
