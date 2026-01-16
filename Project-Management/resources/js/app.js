@@ -1,4 +1,5 @@
 import './bootstrap';
+import 'preline';
 
 window.searchTasks = val => fetch(`/?search=${val}`, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
     .then(res => res.text())

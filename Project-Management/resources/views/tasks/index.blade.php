@@ -1,68 +1,42 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
-    <div class="d-flex justify-content-between mb-4">
-        <h1>{{ __('messages.title') }}</h1>
-        <button class="btn btn-primary" onclick="openModal()">{{ __('messages.add_button') }}</button>
-    </div>
+    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-extrabold text-black">{{ __('messages.title') }}</h1>
+            <button type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" onclick="openModal()">
+                {{ __('messages.add_button') }}
+            </button>
+        </div>
 
-    <input type="text" class="form-control mb-3" 
-           placeholder="{{ __('messages.search_placeholder') }}" 
-           onkeyup="searchTasks(this.value)">
+        <div class="mb-4">
+            <input type="text" 
+                   class="py-3 px-4 block w-full border-2 border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none text-black bg-white placeholder-gray-500 font-medium" 
+                   placeholder="{{ __('messages.search_placeholder') }}" 
+                   onkeyup="searchTasks(this.value)">
+        </div>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>{{ __('messages.table_headers.title') }}</th>
-                <th>{{ __('messages.table_headers.description') }}</th>
-                <th>{{ __('messages.table_headers.projects') }}</th>
-            </tr>
-        </thead>
-        <tbody id="tasks-table-body">
-            @include('tasks.table')
-        </tbody>
-    </table>
-
-    <!-- Modal (Simple CSS, Hidden by Default) -->
-    <div id="taskModal" class="modal" tabindex="-1" style="display: none; background: rgba(0,0,0,0.5);">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{ __('messages.modal.title') }}</h5>
-                    <button type="button" class="btn-close" onclick="closeModal()"></button>
+        <div class="flex flex-col">
+            <div class="-m-1.5 overflow-x-auto">
+                <div class="p-1.5 min-w-full inline-block align-middle">
+                    <div class="border rounded-lg shadow overflow-hidden dark:border-gray-700 dark:shadow-gray-900">
+                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                            <thead class="bg-gray-50 dark:bg-gray-700">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-gray-400">{{ __('messages.table_headers.title') }}</th>
+                                    <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-gray-400">{{ __('messages.table_headers.description') }}</th>
+                                    <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-gray-400">{{ __('messages.table_headers.projects') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tasks-table-body" class="divide-y divide-gray-200 dark:divide-gray-700">
+                                @include('tasks.table')
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <form onsubmit="saveTask(event)">
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label>{{ __('messages.modal.labels.title') }}</label>
-                            <input type="text" name="title" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label>{{ __('messages.modal.labels.description') }}</label>
-                            <textarea name="description" class="form-control"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label>{{ __('messages.modal.labels.image') }}</label>
-                            <input type="file" name="image" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label>{{ __('messages.modal.labels.projects') }}</label>
-                            <div class="form-check">
-                                @foreach($projects as $project)
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" name="project_id[]" value="{{ $project->id }}">
-                                        <label class="form-check-label">{{ $project->title }}</label>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" onclick="closeModal()">{{ __('messages.modal.close') }}</button>
-                        <button type="submit" class="btn btn-primary">{{ __('messages.modal.save') }}</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
+    
+    @include('tasks._modal')
 @endsection
