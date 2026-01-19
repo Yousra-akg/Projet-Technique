@@ -1,3 +1,4 @@
+
 <?php
 
 namespace Database\Seeders;
@@ -13,6 +14,10 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        \Illuminate\Support\Facades\Schema::disableForeignKeyConstraints();
+        \Illuminate\Support\Facades\DB::table('users')->truncate();
+        \Illuminate\Support\Facades\Schema::enableForeignKeyConstraints();
+
         $file = database_path('seeders/data/users.csv');
         
         if (($handle = fopen($file, 'r')) !== false) {
