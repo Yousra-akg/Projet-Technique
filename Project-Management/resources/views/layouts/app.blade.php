@@ -25,6 +25,7 @@
     <style>
         body { font-family: 'Manrope', sans-serif; }
     </style>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-slate-100 text-slate-700 antialiased min-h-screen flex flex-col">
     
@@ -37,6 +38,13 @@
                     <div class="w-8 h-8 bg-yellow-400 rounded-lg flex items-center justify-center text-slate-900 font-bold shadow-sm">T</div>
                     <span class="font-bold text-lg text-slate-800 tracking-tight">Task<span class="text-yellow-500">Manage</span></span>
                 </div>
+
+                <!-- Navigation -->
+                <div class="hidden md:flex items-center gap-6 ml-10">
+                    <a href="{{ route('home') }}" class="text-sm font-medium {{ request()->routeIs('home') ? 'text-yellow-500' : 'text-slate-600 hover:text-yellow-500' }}">Home</a>
+                    <a href="{{ route('admin.index') }}" class="text-sm font-medium {{ request()->routeIs('admin.index') ? 'text-yellow-500' : 'text-slate-600 hover:text-yellow-500' }}">Admin</a>
+                </div>
+
                 <!-- Profile -->
                 <div class="flex items-center gap-4">
                     <div class="h-9 w-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-xs font-bold text-slate-600">TM</div>

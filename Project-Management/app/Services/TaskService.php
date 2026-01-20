@@ -9,13 +9,15 @@ class TaskService
     {
         return Task::query()
             ->when($filters['search'] ?? null, function($query, $search) {
-                $query->where('title', 'like', "%{$search}%");
+                $query->where('tasks.title', 'like', "%{$search}%");
             })
             ->when($filters['project_id'] ?? null, function($query, $projectId) {
-                $query->whereRelation('projects', 'id', $projectId);
+                $query->whereHas('projects', function($q) use ($projectId) {
+                    $q->where('projects.id', $projectId);
+                });
             })
             ->with('projects')
-            ->latest()
+            ->orderBy('tasks.created_at', 'desc')
             ->paginate(10);  
     }
 

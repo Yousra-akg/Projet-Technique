@@ -9,4 +9,4 @@ Route::get('/', [PublicTaskController::class, 'index'])->name('home');
 Route::get('/details/{task}', [PublicTaskController::class, 'show'])->name('public.tasks.show');
 
 Route::resource('tasks', TaskController::class);
-Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
+Route::get('/admin', [TaskController::class, 'index'])->name('admin.index');
