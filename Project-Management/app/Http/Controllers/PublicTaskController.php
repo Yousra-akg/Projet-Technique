@@ -12,7 +12,7 @@ class PublicTaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::with('projects')->latest()->get();
+        $tasks = Task::with('projects')->latest()->paginate(6);
         return view('public.index', compact('tasks'));
     }
 

@@ -45,19 +45,18 @@
         </div>
     </nav>
 
-    <!-- Main Content Wrapper -->
-    <div class="flex-grow w-[75%] mx-auto px-6 lg:px-8 py-10">
+    <div class="flex-grow">
         @yield('content')
     </div>
     
-    <!-- Footer -->
     <footer class="border-t border-slate-200 bg-white py-8">
-        <div class="w-[75%] mx-auto px-6 lg:px-8 text-center">
-            <p class="text-sm text-slate-400">&copy; {{ date('Y') }} Project Management. All rights reserved (v2.0 Fixed).</p>
+        <div class="max-w-[85rem] mx-auto px-6 lg:px-8 text-center">
+            <p class="text-sm text-slate-400">&copy; {{ date('Y') }} Project Management. All rights reserved.</p>
         </div>
     </footer>
     
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js"></script>
     @stack('scripts')
 </body>
 </html>

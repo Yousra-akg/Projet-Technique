@@ -31,7 +31,7 @@ class TaskSeeder extends Seeder
             Task::create([
                 'title'       => $task['title'],
                 'description' => $task['description'] ?? null,
-                'image'       => $task['image'] ?? null,
+                'image'       => isset($task['image']) ? 'tasks/' . $task['image'] : null,
                 'user_id'     => $task['user_id'],
                 'projet'      => $task['projet'],
                 'created_at'  => $task['created_at'],
