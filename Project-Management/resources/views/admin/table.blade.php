@@ -30,8 +30,8 @@
                     </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                    <button type="button" onclick="openEditTaskModal({{ $task->id }})" class="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline font-medium">Edit</button>
-                    <button type="button" onclick="deleteTask({{ $task->id }})" class="inline-flex items-center gap-x-1.5 text-red-600 decoration-2 hover:underline font-medium ms-3">Delete</button>
+                    <button type="button" @click="openEditModal({{ $task->id }})" class="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline font-medium">Edit</button>
+                    <button type="button" @click="deleteTask({{ $task->id }})" class="inline-flex items-center gap-x-1.5 text-red-600 decoration-2 hover:underline font-medium ms-3">Delete</button>
                 </td>
             </tr>
         @empty
