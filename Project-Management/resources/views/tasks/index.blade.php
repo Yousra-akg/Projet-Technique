@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto" x-data="taskManager">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-extrabold text-black">{{ __('tasksview.app_name') }}</h1>
-            <button type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" onclick="openModal()">
+            <button type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" @click="openModal">
                 {{ __('tasksview.add_button') }}
             </button>
         </div>
@@ -13,7 +13,7 @@
             <input type="text" 
                    class="py-3 px-4 block w-full border-2 border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none text-black bg-white placeholder-gray-500 font-medium" 
                    placeholder="{{ __('tasksview.search_placeholder') }}" 
-                   onkeyup="searchTasks(this.value)">
+                   @input="searchTasks($el.value)">
         </div>
 
         <div class="flex flex-col">
@@ -36,7 +36,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    
     @include('tasks._modal')
+    </div>
 @endsection

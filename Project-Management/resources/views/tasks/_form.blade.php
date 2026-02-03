@@ -1,4 +1,4 @@
-<form onsubmit="saveTask(event)">
+<form @submit.prevent="saveTask">
     <div class="space-y-4">
         <div>
             <label class="block text-sm font-bold mb-2 text-black">{{ __('tasksattributes.title') }}</label>
@@ -25,7 +25,7 @@
         </div>
     </div>
     <div class="mt-5 flex justify-end gap-x-2">
-        <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-black shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" onclick="closeModal()">{{ __('tasksview.modal_close') }}</button>
+        <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-black shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" @click="closeModal">{{ __('tasksview.modal_close') }}</button>
         <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">{{ __('tasksview.modal_save') }}</button>
     </div>
 </form>
