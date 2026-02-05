@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class LoginController extends Controller
 {
@@ -48,7 +49,13 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
-            return redirect()->intended($this->redirectTo);
+            $user = Auth::user();
+
+            if ($user && Gate::forUser($user)->allows('access-admin')) {
+                return redirect()->intended($this->redirectTo);
+            }
+
+            return redirect()->intended('/');
         }
 
         return back()

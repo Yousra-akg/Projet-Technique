@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -66,7 +67,11 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect($this->redirectTo);
+        if (Gate::forUser($user)->allows('access-admin')) {
+            return redirect($this->redirectTo);
+        }
+
+        return redirect('/');
     }
 
     /**

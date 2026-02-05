@@ -29,8 +29,11 @@ Route::get('password/reset/{token}', [ResetPasswordController::class, 'showReset
 Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 // Protected Routes
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'can:access-admin'])->group(function () {
     Route::resource('tasks', TaskController::class);
     Route::get('/admin', [TaskController::class, 'index'])->name('admin.index');
+});
+
+Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home.dashboard');
 });
