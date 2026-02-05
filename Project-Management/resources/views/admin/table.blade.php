@@ -30,8 +30,17 @@
                     </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                    <button type="button" @click="openEditModal({{ $task->id }})" class="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline font-medium">Edit</button>
-                    <button type="button" @click="deleteTask({{ $task->id }})" class="inline-flex items-center gap-x-1.5 text-red-600 decoration-2 hover:underline font-medium ms-3">Delete</button>
+                    <button type="button" @click="openEditModal({{ $task->id }})" class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium" aria-label="Edit" title="Edit">
+                        <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.5 7.125L16.862 4.487" />
+                        </svg>
+                    </button>
+                    <button type="button" @click="deleteTask({{ $task->id }})" class="inline-flex items-center text-red-600 hover:text-red-700 font-medium ms-3" aria-label="Delete" title="Delete">
+                        <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 7h12m-1 0l-1 14H8L7 7m3-3h4a1 1 0 011 1v2H9V5a1 1 0 011-1z" />
+                        </svg>
+                    </button>
                 </td>
             </tr>
         @empty
