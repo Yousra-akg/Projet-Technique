@@ -30,7 +30,7 @@ style: |
 **gestion des tâches**
 
 # Contexte
-![Scrum](images/2_tup.png)
+![Scrum](images/image.png)
 
 # Analyse technique 
 ## Fonctionnalités Clés
