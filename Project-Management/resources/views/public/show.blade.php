@@ -42,11 +42,7 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-2 gap-4 border-t border-gray-200 pt-6">
-        <div>
-          <h4 class="text-sm font-semibold uppercase text-gray-500">Assigned To</h4>
-          <p class="mt-1 text-gray-800 font-medium">{{ $task->user->name ?? 'Unassigned' }}</p>
-        </div>
+      <div class="grid grid-cols-1 gap-4 border-t border-gray-200 pt-6">
         <div>
           <h4 class="text-sm font-semibold uppercase text-gray-500">Created At</h4>
           <p class="mt-1 text-gray-800 font-medium">{{ $task->created_at->format('M d, Y') }}</p>
