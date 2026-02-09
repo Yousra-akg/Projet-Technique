@@ -73,7 +73,7 @@ style: |
 - Une **tâche** appartient à un **projet**
 
 # Fonctionnalitées 
-![alt text](images/image.png)
+![alt text](images/img1.png)
 
 # Conception
 
