@@ -1,59 +1,83 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+---
+marp: true
+theme: default
+_class: lead
+paginate: true
+backgroundColor: #ffffff
+color: #5B2C6F
+style: |
+  img {
+    max-width: 80%;
+    max-height: 65vh;
+    display: block;
+    margin: 1em auto;
+    object-fit: contain;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+---
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Présentation Projet technique
+### Application de gestion et filtrage des tâches
+**Présentée par : Yousra Akajou**
+**Encadré par : M. Fouad Essarraj**
+**Date : 05/01/2026**
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Choix du sujet
+**gestion des tâches**
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# Contexte
+![Scrum](images/2_tup.png)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# Analyse technique
+## Fonctionnalités Clés
+- CRUD **Tâches**
+- Details Tache
+- Filtrer les tâches par **projet**
+- Rechercher les taches
 
-## Learning Laravel
+## Stack Technique
+- 1- **Base de données** : MySQL
+- 2- **Framework** : Laravel
+- 3- **Architecture N-tier** : Services
+- 4- **Architecture** : MVC
+- 5- **Moteur de vues** : Blade
+- 6- **AJAX** : Actions dynamiques (filtrage, mise à jour du statut)
+- 7- **Upload d'images** : Images associées aux tâches
+- 8- **Laravel multilingue** : Support de plusieurs langues
+- 9- **Vite**
+- 10- **Preline UI library**
+- 11- **Lucide Library**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Base de Données
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Table `projects`
+- id
+- title
+- description
+- timestamps
 
-## Laravel Sponsors
+### Table `tasks`
+- id
+- title
+- description
+- image
+- project_id (clé étrangère)
+- timestamps
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🔗 Relation
+- Un **projet** possède plusieurs **tâches**
+- Une **tâche** appartient à un **projet**
 
-### Premium Partners
+# Fonctionnalitées
+![alt text](images/image.png)
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+# Conception
+![alt text](images/img2.png)
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Sujet de Live coding
+- Un bouton "Ajouter" qui ouvre une modale pour créer un nouvel élément.
+- Une barre de recherche filtrant des éléments par titre.
