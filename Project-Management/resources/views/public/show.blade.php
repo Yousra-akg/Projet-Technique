@@ -5,7 +5,7 @@
   <div class="max-w-4xl">
     <!-- Back Button -->
     <div class="mb-6">
-      <a class="inline-flex items-center gap-x-1.5 text-sm text-gray-600 decoration-2 hover:text-yellow-500 focus:outline-none focus:text-yellow-500 font-medium" href="{{ route('home') }}">
+      <a class="inline-flex items-center gap-x-1.5 text-sm text-gray-600 decoration-2 hover:text-blue-600 focus:outline-none focus:text-blue-600 font-medium" href="{{ route('home') }}">
         <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
         Back to list
       </a>
@@ -18,7 +18,7 @@
 
         <div class="flex flex-wrap gap-2">
             @foreach($task->projects as $project)
-                <span class="py-1 px-2 inline-flex items-center gap-x-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full">
+                <span class="py-1 px-2 inline-flex items-center gap-x-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
                     {{ $project->title }}
                 </span>
             @endforeach

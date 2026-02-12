@@ -30,12 +30,14 @@ class TaskController extends Controller
 
     public function store(StoreTaskRequest $request)
     {
+        \Illuminate\Support\Facades\Gate::authorize('manage-tasks');
         $this->taskService->store($request->validated());
         return response()->json(['success' => true]);
     }
 
     public function edit(Task $task)
     {
+        \Illuminate\Support\Facades\Gate::authorize('manage-tasks');
         return response()->json([
             'task' => $task,
             'project_ids' => $task->projects->pluck('id')
@@ -44,12 +46,14 @@ class TaskController extends Controller
 
     public function update(UpdateTaskRequest $request, Task $task)
     {
+        \Illuminate\Support\Facades\Gate::authorize('manage-tasks');
         $this->taskService->update($task, $request->validated());
         return response()->json(['success' => true]);
     }
 
     public function destroy(Task $task)
     {
+        \Illuminate\Support\Facades\Gate::authorize('delete-task');
         $this->taskService->delete($task);
         return response()->json(['success' => true]);
     }

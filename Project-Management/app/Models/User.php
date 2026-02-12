@@ -15,18 +15,35 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'name',
         'email',
         'password',
+        'role',
     ];
+
+    public function isAdmin(): bool {
+        return $this->role === 'admin';
+    }
+
+    public function isEditor(): bool {
+        return $this->role === 'editor';
+    }
+
+    public function isUser(): bool {
+        return $this->role === 'user';
+    }
+
+    public function tasks() {
+        return $this->hasMany(Task::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $hidden = [
         'password',

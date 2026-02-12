@@ -12,12 +12,12 @@
   <div class="p-4 md:p-6">
     <div class="flex flex-wrap gap-2 mb-3">
         @foreach($task->projects as $project)
-            <span class="py-1 px-2 inline-flex items-center gap-x-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full">
+            <span class="py-1 px-2 inline-flex items-center gap-x-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
                 {{ $project->title }}
             </span>
         @endforeach
     </div>
-    <h3 class="text-xl font-semibold text-gray-800 group-hover:text-yellow-600">
+    <h3 class="text-xl font-semibold text-gray-800 group-hover:text-blue-600">
       {{ $task->title }}
     </h3>
     <p class="mt-3 text-gray-500 line-clamp-2">
@@ -25,7 +25,7 @@
     </p>
   </div>
   <div class="mt-auto flex border-t border-gray-200 divide-x divide-gray-200">
-    <a class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-es-xl bg-white text-gray-800 shadow-sm hover:bg-yellow-50 hover:text-yellow-600 disabled:opacity-50 disabled:pointer-events-none" href="{{ route('public.tasks.show', $task->id) }}">
+    <a class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-es-xl bg-white text-gray-800 shadow-sm hover:bg-blue-50 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none" href="{{ route('public.tasks.show', $task->id) }}">
       View details
     </a>
   </div>

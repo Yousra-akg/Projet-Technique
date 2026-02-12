@@ -17,7 +17,7 @@
             theme: {
                 extend: {
                     fontFamily: { sans: ['Manrope', 'sans-serif'] },
-                    colors: { brand: { yellow: '#fcd34d' } }
+                    colors: { brand: { blue: '#3b82f6' } }
                 }
             }
         }
