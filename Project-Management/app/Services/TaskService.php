@@ -18,7 +18,7 @@ class TaskService
             })
             ->with('projects')
             ->orderBy('tasks.created_at', 'desc')
-            ->paginate(10);  
+            ->paginate(2);  
     }
 
     public function store(array $data)
