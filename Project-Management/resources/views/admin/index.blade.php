@@ -46,4 +46,121 @@
     </div>
     @include('admin.modal')
 </div>
+
+<script>
+document.addEventListener('alpine:init', () => {
+    Alpine.data('adminTaskManager', () => ({
+        isModalOpen: false,
+        form: {
+            title: '',
+            description: '',
+            project_id: [],
+            image: null
+        },
+        search: '',
+        projectId: '',
+        
+        openAddModal() {
+            this.isModalOpen = true;
+            this.form = {
+                title: '',
+                description: '',
+                project_id: [],
+                image: null
+            };
+            document.getElementById('modalTitle').textContent = 'Ajouter une tâche';
+            document.getElementById('taskId').value = '';
+        },
+        
+        openEditModal(taskId) {
+            fetch(`/tasks/${taskId}/edit`)
+                .then(response => response.json())
+                .then(data => {
+                    this.form = {
+                        title: data.task.title,
+                        description: data.task.description || '',
+                        project_id: data.project_ids || [],
+                        image: null
+                    };
+                    this.isModalOpen = true;
+                    document.getElementById('modalTitle').textContent = 'Modifier une tâche';
+                    document.getElementById('taskId').value = data.task.id;
+                });
+        },
+        
+        closeModal() {
+            this.isModalOpen = false;
+        },
+        
+        submitTask() {
+            const formData = new FormData(document.getElementById('taskForm'));
+            const taskId = document.getElementById('taskId').value;
+            const url = taskId ? `/tasks/${taskId}` : '/tasks';
+            const method = taskId ? 'PUT' : 'POST';
+            
+            fetch(url, {
+                method: method,
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Accept': 'application/json',
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    this.closeModal();
+                    this.refreshTable();
+                }
+            });
+        },
+        
+        deleteTask(taskId) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?')) {
+                fetch(`/tasks/${taskId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'Accept': 'application/json',
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        this.refreshTable();
+                    }
+                });
+            }
+        },
+        
+        refreshTable() {
+            const params = new URLSearchParams();
+            if (this.search) params.append('search', this.search);
+            if (this.projectId) params.append('project_id', this.projectId);
+            
+            fetch(`/admin?${params.toString()}`, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                }
+            })
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('adminTableContainer').innerHTML = html;
+            });
+        },
+        
+        handlePagination(url) {
+            fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                }
+            })
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('adminTableContainer').innerHTML = html;
+            });
+        }
+    }));
+});
+</script>
 @endsection
