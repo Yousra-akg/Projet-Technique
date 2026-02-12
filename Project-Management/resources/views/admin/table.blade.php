@@ -2,8 +2,8 @@
     <thead class="bg-gray-50">
         <tr>
             <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Image</th>
-            <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Title</th>
-            <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Projects</th>
+            <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Titre</th>
+            <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Projets</th>
             <th class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase">Actions</th>
         </tr>
     </thead>
@@ -45,7 +45,7 @@
             </tr>
         @empty
             <tr>
-                <td colspan="4" class="px-6 py-10 whitespace-nowrap text-center text-gray-500">No tasks found.</td>
+                <td colspan="4" class="px-6 py-10 whitespace-nowrap text-center text-gray-500">Aucune tâche trouvée.</td>
             </tr>
         @endforelse
     </tbody>
