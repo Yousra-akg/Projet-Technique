@@ -11,23 +11,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Manrope', 'sans-serif'] },
-                    colors: { brand: { blue: '#3b82f6' } }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { font-family: 'Manrope', sans-serif; }
-    </style>
-    <!-- Alpine.js -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-slate-100 text-slate-700 antialiased min-h-screen flex flex-col">
