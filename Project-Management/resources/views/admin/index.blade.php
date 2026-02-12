@@ -82,8 +82,14 @@ function submitTask(event) {
     
     const formData = new FormData(event.target);
     const taskId = document.getElementById('taskId').value;
+    
+    if (taskId) {
+        // Pour PUT, on doit ajouter _method et _token
+        formData.append('_method', 'PUT');
+    }
+    
     const url = taskId ? `/tasks/${taskId}` : '/tasks';
-    const method = taskId ? 'PUT' : 'POST';
+    const method = 'POST'; // Toujours POST pour Laravel
     
     fetch(url, {
         method: method,
@@ -98,7 +104,13 @@ function submitTask(event) {
         if (data.success) {
             closeModal();
             refreshTable();
+        } else {
+            alert('Erreur: ' + (data.message || 'Une erreur est survenue'));
         }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Erreur de connexion. Veuillez réessayer.');
     });
 }
 
