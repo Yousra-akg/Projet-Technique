@@ -44,7 +44,7 @@
             </div>
         </div>
     </div>
-    @include('admin.modal')
+    @include('admin._modal')
 </div>
 
 <script>
@@ -54,48 +54,16 @@ window.openModal = () => {
     document.getElementById('modalTitle').textContent = 'Ajouter une tâche';
     document.getElementById('taskId').value = '';
     document.getElementById('taskForm').reset();
+    
+    // Custom Multi-select reset
+    if (window.updateUI) window.updateUI();
 };
 
 window.closeModal = () => {
     document.getElementById('taskModal').style.display = 'none';
 };
 
-window.saveTask = (e) => {
-    e.preventDefault();
-    
-    const formData = new FormData(e.target);
-    const taskId = document.getElementById('taskId').value;
-    
-    if (taskId) {
-        formData.append('_method', 'PUT');
-    }
-    
-    const url = taskId ? `/tasks/${taskId}` : '/tasks';
-    
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            'Accept': 'application/json',
-        },
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            closeModal();
-            refreshTable();
-            // Optionnel: recharger la page pour voir les changements
-            window.location.reload();
-        } else {
-            alert('Erreur: ' + (data.message || 'Une erreur est survenue'));
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Erreur de connexion. Veuillez réessayer.');
-    });
-};
+// La fonction saveTask est maintenant centralisée dans app.js
 
 function refreshTable() {
     const search = document.getElementById('searchInput').value;
@@ -115,6 +83,37 @@ function refreshTable() {
         document.getElementById('adminTableContainer').innerHTML = html;
     });
 }
+
+window.openEditModal = (taskId) => {
+    fetch(`/tasks/${taskId}/edit`, {
+        headers: {
+            'Accept': 'application/json',
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        const task = data.task;
+        const projectIds = data.project_ids;
+        
+        document.getElementById('taskModal').style.display = 'block';
+        document.getElementById('modalTitle').textContent = 'Modifier la tâche';
+        document.getElementById('taskId').value = task.id;
+        
+        const form = document.getElementById('taskForm');
+        form.querySelector('[name="title"]').value = task.title;
+        form.querySelector('[name="description"]').value = task.description || '';
+        
+        // Handle multi-select for projects
+        const select = document.getElementById('realProjectSelect');
+        if (select) {
+            Array.from(select.options).forEach(option => {
+                option.selected = projectIds.includes(parseInt(option.value));
+            });
+            // Update custom UI
+            if (window.updateUI) window.updateUI();
+        }
+    });
+};
 
 function deleteTask(taskId) {
     if (confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?')) {
@@ -136,7 +135,8 @@ function deleteTask(taskId) {
 
 // Search listener
 document.getElementById('searchInput').addEventListener('input', function() {
-    setTimeout(refreshTable, 500);
+    clearTimeout(window.searchTimeout);
+    window.searchTimeout = setTimeout(refreshTable, 500);
 });
 
 document.getElementById('projectFilter').addEventListener('change', refreshTable);

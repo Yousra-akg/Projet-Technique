@@ -31,6 +31,7 @@ class TaskService
             'title'       => $data['title'],
             'description' => $data['description'] ?? null,
             'image'       => $data['image'] ?? null,
+            'user_id'     => auth()->id() ?? \App\Models\User::first()?->id,
         ]);
 
         if (isset($data['project_id'])) {
@@ -54,6 +55,7 @@ class TaskService
             'title'       => $data['title'],
             'description' => $data['description'] ?? null,
             'image'       => $data['image'] ?? $task->image,
+            'user_id'     => auth()->id() ?? \App\Models\User::first()?->id,
         ]);
 
         if (isset($data['project_id'])) {
