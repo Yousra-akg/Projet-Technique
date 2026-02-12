@@ -42,7 +42,7 @@ style: |
 
 ---
 # Contexte
-![Scrum](images/2-tup.png)
+![Scrum](images/image.png)
 
 ---
 ## Exigences: Travail à faire
@@ -101,7 +101,7 @@ Tableau sécurisé dédié à la gestion des tâches.
 - Une **tâche** appartient à un **projet**
 
 # Fonctionnalitées 
-![alt text](images/image.png)
+![alt text](images/img1.png)
 
 # Conception
 

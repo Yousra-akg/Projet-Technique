@@ -21,7 +21,20 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
+
+    public function isAdmin(): bool {
+        return $this->role === 'admin';
+    }
+
+    public function isEditor(): bool {
+        return $this->role === 'editor';
+    }
+
+    public function isUser(): bool {
+        return $this->role === 'user';
+    }
 
     public function tasks() {
         return $this->hasMany(Task::class);

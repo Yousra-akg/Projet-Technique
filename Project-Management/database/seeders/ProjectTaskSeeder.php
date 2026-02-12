@@ -3,15 +3,14 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Task;
+use App\Models\Project;
 
 class ProjectTaskSeeder extends Seeder
 {
-    /**
-     * Exécuter le seeder
-     */
     public function run(): void
     {
+<<<<<<< HEAD
         \Illuminate\Support\Facades\Schema::disableForeignKeyConstraints();
         DB::table('project_task')->truncate();
         \Illuminate\Support\Facades\Schema::enableForeignKeyConstraints();
@@ -23,17 +22,24 @@ class ProjectTaskSeeder extends Seeder
             
             while (($row = fgetcsv($handle, 1000, ',')) !== false) {
                 $relation = array_combine($header, $row);
+=======
+        $tasks = Task::all();
+        foreach ($tasks as $task) {
+            if ($task->projet) {
+                // Split by " | " as seen in the CSV
+                $projectNames = explode('|', $task->projet);
+>>>>>>> gates
                 
-                DB::table('project_task')->insert([
-                    'id' => $relation['id'],
-                    'project_id' => $relation['project_id'],
-                    'task_id' => $relation['task_id'],
-                    'created_at' => $relation['created_at'],
-                    'updated_at' => $relation['updated_at']
-                ]);
+                foreach ($projectNames as $name) {
+                    $project = Project::where('title', trim($name))->first();
+                    if ($project) {
+                        // Check if not already attached to avoid duplicates if run multiple times (though migrate:refresh clears info)
+                        if (!$task->projects()->where('project_id', $project->id)->exists()) {
+                            $task->projects()->attach($project->id);
+                        }
+                    }
+                }
             }
-            
-            fclose($handle);
         }
     }
 }

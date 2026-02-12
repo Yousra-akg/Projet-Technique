@@ -1,6 +1,7 @@
 <?php
 
 return [
+<<<<<<< HEAD
     'app_name' => 'Gestion des Tâches',
     'search_placeholder' => 'Rechercher par titre...',
     'add_button' => 'Ajouter une tâche',
@@ -11,4 +12,9 @@ return [
     'table_description' => 'Description',
     'table_projects' => 'Projets',
     'success_message' => 'Tâche ajoutée avec succès !',
+=======
+    'modal_title' => 'Ajouter une tâche',
+    'modal_close' => 'Fermer',
+    'modal_save' => 'Enregistrer',
+>>>>>>> gates
 ];
