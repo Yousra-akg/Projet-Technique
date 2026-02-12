@@ -8,7 +8,6 @@ use App\Services\TaskService;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 
 class TaskController extends Controller
 {
@@ -19,8 +18,6 @@ class TaskController extends Controller
     
     public function index(Request $request)
     {
-        Gate::authorize('manage-tasks');
-
         $tasks = $this->taskService->getTasks($request->all());
         $projects = $this->projectService->getAll();
 
@@ -33,16 +30,12 @@ class TaskController extends Controller
 
     public function store(StoreTaskRequest $request)
     {
-        Gate::authorize('manage-tasks');
-
         $this->taskService->store($request->validated());
         return response()->json(['success' => true]);
     }
 
     public function edit(Task $task)
     {
-        Gate::authorize('manage-tasks');
-
         return response()->json([
             'task' => $task,
             'project_ids' => $task->projects->pluck('id')
@@ -51,16 +44,12 @@ class TaskController extends Controller
 
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        Gate::authorize('manage-tasks');
-
         $this->taskService->update($task, $request->validated());
         return response()->json(['success' => true]);
     }
 
     public function destroy(Task $task)
     {
-        Gate::authorize('delete-task');
-
         $this->taskService->delete($task);
         return response()->json(['success' => true]);
     }

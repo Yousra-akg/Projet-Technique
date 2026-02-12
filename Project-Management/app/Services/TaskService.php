@@ -18,7 +18,7 @@ class TaskService
             })
             ->with('projects')
             ->orderBy('tasks.created_at', 'desc')
-            ->paginate(10);  
+            ->paginate(2);  
     }
 
     public function store(array $data)
@@ -31,7 +31,7 @@ class TaskService
             'title'       => $data['title'],
             'description' => $data['description'] ?? null,
             'image'       => $data['image'] ?? null,
-            'user_id'     => 1,
+            'user_id'     => auth()->id() ?? \App\Models\User::first()?->id,
         ]);
 
         if (isset($data['project_id'])) {
@@ -55,6 +55,7 @@ class TaskService
             'title'       => $data['title'],
             'description' => $data['description'] ?? null,
             'image'       => $data['image'] ?? $task->image,
+            'user_id'     => auth()->id() ?? \App\Models\User::first()?->id,
         ]);
 
         if (isset($data['project_id'])) {
