@@ -13,15 +13,15 @@
         <div class="p-4 overflow-y-auto space-y-4">
           <div>
             <label class="block text-sm font-medium mb-2">Titre</label>
-            <input type="text" x-model="form.title" name="title" id="taskTitle" class="py-2 px-3 block w-full border-gray-200 rounded-lg text-sm focus:border-yellow-500 focus:ring-yellow-500" required>
+            <input type="text" x-model="form.title" name="title" id="taskTitle" class="py-2 px-3 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500" required>
           </div>
           <div>
             <label class="block text-sm font-medium mb-2">Description</label>
-            <textarea x-model="form.description" name="description" id="taskDescription" class="py-2 px-3 block w-full border-gray-200 rounded-lg text-sm focus:border-yellow-500 focus:ring-yellow-500" rows="3"></textarea>
+            <textarea x-model="form.description" name="description" id="taskDescription" class="py-2 px-3 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500" rows="3"></textarea>
           </div>
           <div>
             <label class="block text-sm font-medium mb-2">Projets</label>
-            <select name="project_id[]" id="taskProjects" class="py-2 px-3 block w-full border-gray-200 rounded-lg text-sm focus:border-yellow-500 focus:ring-yellow-500" multiple>
+            <select name="project_id[]" id="taskProjects" class="py-2 px-3 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500" multiple>
                 @foreach($projects as $project)
                     <option value="{{ $project->id }}">{{ $project->title }}</option>
                 @endforeach
@@ -30,12 +30,12 @@
           </div>
           <div>
             <label class="block text-sm font-medium mb-2">Image</label>
-            <input type="file" name="image" id="taskImage" class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-yellow-500 focus:ring-yellow-500 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4">
+            <input type="file" name="image" id="taskImage" class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4">
           </div>
         </div>
         <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t">
           <button type="button" @click="closeModal" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50">Fermer</button>
-          <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-yellow-500 text-white hover:bg-yellow-600">Enregistrer</button>
+          <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-500 text-white hover:bg-blue-600">Enregistrer</button>
         </div>
       </form>
     </div>

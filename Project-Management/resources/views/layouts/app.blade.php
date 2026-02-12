@@ -17,7 +17,7 @@
             theme: {
                 extend: {
                     fontFamily: { sans: ['Manrope', 'sans-serif'] },
-                    colors: { brand: { yellow: '#fcd34d' } }
+                    colors: { brand: { blue: '#3b82f6' } }
                 }
             }
         }
@@ -35,13 +35,13 @@
             <div class="flex justify-between h-16 items-center">
                 <!-- Branding -->
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 bg-yellow-400 rounded-lg flex items-center justify-center text-slate-900 font-bold shadow-sm">T</div>
-                    <span class="font-bold text-lg text-slate-800 tracking-tight">Task<span class="text-yellow-500">Manage</span></span>
+                    <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold shadow-sm">T</div>
+                    <span class="font-bold text-lg text-slate-800 tracking-tight">Task<span class="text-blue-500">Manage</span></span>
                 </div>
 
                 <!-- Navigation -->
                 <div class="hidden md:flex items-center gap-6 ml-10">
-                    <a href="{{ route('home') }}" class="text-sm font-medium {{ request()->routeIs('home') ? 'text-yellow-500' : 'text-slate-600 hover:text-yellow-500' }}">Home</a>
+                    <a href="{{ route('home') }}" class="text-sm font-medium {{ request()->routeIs('home') ? 'text-blue-500' : 'text-slate-600 hover:text-blue-500' }}">Home</a>
                 </div>
             </div>
         </div>
