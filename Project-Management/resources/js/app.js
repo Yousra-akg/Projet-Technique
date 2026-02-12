@@ -15,37 +15,39 @@ Alpine.data('adminTaskManager', () => ({
     search: '',
     projectId: '',
 
-    init() {
-        // Initial load or listener setup if needed
-    },
+window.closeModal = () => {
+    document.getElementById('taskModal').style.display = 'none';
+};
 
-    refreshTable(page = 1) {
-        fetch(`/tasks?page=${page}&search=${this.search}&project_id=${this.projectId}`, {
-            headers: { 'X-Requested-With': 'XMLHttpRequest' }
-        })
-            .then(res => res.text())
-            .then(html => {
-                document.getElementById('adminTableContainer').innerHTML = html;
-            });
-    },
+window.saveTask = e => {
+    e.preventDefault();
+    fetch('/tasks', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        },
+        body: new FormData(e.target)
+    })
+    .then(() => {
+        window.location.reload();
+    })
+};
 
-    openAddModal() {
-        this.resetForm();
-        this.isModalOpen = true;
-        document.getElementById('modalTitle').innerText = 'Add Task';
-    },
-
-    openEditModal(id) {
-        fetch(`/tasks/${id}/edit`)
-            .then(res => res.json())
-            .then(data => {
-                this.taskId = data.task.id;
-                this.form.title = data.task.title;
-                this.form.description = data.task.description || '';
-                this.form.project_ids = data.project_ids; // Assuming array of IDs
-
-                // For file inputs, we can't set value programmatically, usually left empty or show preview
-
+window.openEditModal = (taskId) => {
+    fetch(`/tasks/${taskId}/edit`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('taskModal').style.display = 'block';
+            document.getElementById('modalTitle').textContent = 'Modifier une tâche';
+            document.getElementById('taskId').value = data.task.id;
+            document.getElementById('taskTitle').value = data.task.title;
+            document.getElementById('taskDescription').value = data.task.description || '';
+            
+            // Set project selections
+            const projectSelect = document.getElementById('taskProjects');
+            Array.from(projectSelect.options).forEach(option => {
+                option.selected = data.project_ids.includes(parseInt(option.value));
                 // Update Multi-select UI if necessary (Alpine should handle x-model if simple select)
                 // If usage of standard select multiple with x-model:
                 let select = document.getElementById('taskProjects');
