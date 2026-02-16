@@ -14,7 +14,9 @@ class TaskController extends Controller
     public function __construct(
         private TaskService $taskService,
         private ProjectService $projectService 
-    ) {}
+    ) {
+        $this->middleware('auth');
+    }
     
     public function index(Request $request)
     {
@@ -30,14 +32,32 @@ class TaskController extends Controller
 
     public function store(StoreTaskRequest $request)
     {
-        \Illuminate\Support\Facades\Gate::authorize('manage-tasks');
-        $this->taskService->store($request->validated());
+        $this->authorize('create-task');
+
+        $data = $request->validated();
+        $data['user_id'] = auth()->id();
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image');
+        }
+
+        $task = $this->taskService->store($data);
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Tâche créée avec succès',
+                'task' => $task
+            ]);
+        }
+
         return response()->json(['success' => true]);
     }
 
     public function edit(Task $task)
     {
-        \Illuminate\Support\Facades\Gate::authorize('manage-tasks');
+        $this->authorize('manage-task', $task);
+        
         return response()->json([
             'task' => $task,
             'project_ids' => $task->projects->pluck('id')
@@ -46,15 +66,39 @@ class TaskController extends Controller
 
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        \Illuminate\Support\Facades\Gate::authorize('manage-tasks');
-        $this->taskService->update($task, $request->validated());
+        $this->authorize('manage-task', $task);
+
+        $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image');
+        }
+
+        $updatedTask = $this->taskService->update($task, $data);
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Tâche mise à jour avec succès',
+                'task' => $updatedTask
+            ]);
+        }
+
         return response()->json(['success' => true]);
     }
 
-    public function destroy(Task $task)
+    public function destroy(Request $request, Task $task)
     {
-        \Illuminate\Support\Facades\Gate::authorize('delete-task');
+        $this->authorize('manage-task', $task);
         $this->taskService->delete($task);
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Tâche supprimée avec succès',
+            ]);
+        }
+
         return response()->json(['success' => true]);
     }
 }

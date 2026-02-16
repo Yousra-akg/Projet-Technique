@@ -83,9 +83,6 @@ export default () => ({
     async submitForm(e) {
         const formData = new FormData(e.target);
 
-        // Append selected projects to formData if they are not already there
-        // Actually the hidden select with x-model or manual binding should handle it
-
         if (this.taskId) {
             formData.append('_method', 'PUT');
         }
@@ -120,7 +117,6 @@ export default () => ({
         });
 
         if (ok) {
-            // Instead of reload, we could refresh just the table
             this.searchTasks(this.search);
         } else {
             this.showAlert(data.message || 'Erreur lors de la suppression');
