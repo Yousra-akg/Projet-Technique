@@ -5,11 +5,11 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use App\Models\Project;
 use App\Services\ProjectService;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProjectServiceTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     protected ProjectService $service;
 
@@ -21,10 +21,13 @@ class ProjectServiceTest extends TestCase
 
     public function test_it_can_get_all_projects()
     {
+        // Arrange
+        Project::factory()->count(3)->create();
+
         // Act
         $projects = $this->service->getAll();
 
         // Assert
-        $this->assertGreaterThan(0, $projects->count());
+        $this->assertEquals(3, $projects->count());
     }
 }

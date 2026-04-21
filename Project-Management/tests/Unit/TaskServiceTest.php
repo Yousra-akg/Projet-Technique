@@ -7,11 +7,11 @@ use App\Models\Task;
 use App\Models\Project;
 use App\Services\TaskService;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TaskServiceTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     protected TaskService $service;
 
@@ -23,34 +23,44 @@ class TaskServiceTest extends TestCase
 
     public function test_it_can_get_all_tasks()
     {
-        $request = new Request();
-        $result = $this->service->getTasks($request);
+        // Arrange
+        Task::factory()->count(5)->create();
 
-        $this->assertGreaterThan(0, $result->total());
+        // Act
+        $result = $this->service->getTasks([]);
+
+        // Assert
+        $this->assertEquals(5, $result->total());
     }
 
     public function test_it_can_filter_tasks_by_project()
     {
-        // "Application Web Gestion de Projet" exists in CSV
-        $project = Project::where('title', 'Application Web Gestion de Projet')->first();
+        // Arrange
+        $project = Project::factory()->create();
+        $task = Task::factory()->create();
+        $task->projects()->attach($project);
 
-        $request = new Request([
+        // Act
+        $result = $this->service->getTasks([
             'project_id' => $project->id
         ]);
 
-        $result = $this->service->getTasks($request);
-
-        $this->assertGreaterThan(0, $result->total());
+        // Assert
+        $this->assertEquals(1, $result->total());
+        $this->assertEquals($task->id, $result->first()->id);
     }
 
     public function test_it_can_update_a_task()
     {
-        $task = Task::first();
+        // Arrange
+        $task = Task::factory()->create(['title' => 'Original Title']);
 
+        // Act
         $this->service->update($task, [
             'title' => 'Titre Test Updated'
         ]);
 
+        // Assert
         $this->assertDatabaseHas('tasks', [
             'id' => $task->id,
             'title' => 'Titre Test Updated'
@@ -59,10 +69,13 @@ class TaskServiceTest extends TestCase
 
     public function test_it_can_delete_a_task()
     {
-        $task = Task::first();
+        // Arrange
+        $task = Task::factory()->create();
 
+        // Act
         $this->service->delete($task);
 
+        // Assert
         $this->assertDatabaseMissing('tasks', [
             'id' => $task->id
         ]);
